@@ -1,2 +1,3 @@
-# pet-limitless-web
-Front-end application for Pet Limitless
+# Pet Limitless
+
+Monorepo for **Pet Limitless** website
