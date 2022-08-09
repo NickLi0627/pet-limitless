@@ -19,7 +19,8 @@
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
     "vue-navigation-bar": "^5.0.2",
-    "vue-router": "^4.1.2"
+    "vue-router": "^4.1.2",
+    "vue3-openlayers": "^0.1.70"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
