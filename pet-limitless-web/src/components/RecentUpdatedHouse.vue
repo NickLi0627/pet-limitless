@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type RecentUpdatedHouseModel from "@/model/interface";
+import type HouseModel from "@/model/interface";
 interface Props {
-  house: RecentUpdatedHouseModel;
+  house: HouseModel;
 }
 
 defineProps<Props>();
