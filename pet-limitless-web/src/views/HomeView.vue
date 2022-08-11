@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import RecentUpdatedHouse from "../components/RecentUpdatedHouse.vue";
-import type RecentUpdatedHouseModel from "../model/interface";
+import type HouseModel from "../model/interface";
 
 const input = ref("");
 
 // TODO(Nick): replace with the real API call.
-function generateFakeRecentUpdatedHouse(): RecentUpdatedHouseModel[] {
-  const fakeData: RecentUpdatedHouseModel[] = [];
+function generateFakeRecentUpdatedHouse(): HouseModel[] {
+  const fakeData: HouseModel[] = [];
   for (let i = 1; i < 10; ++i) {
-    const item: RecentUpdatedHouseModel = {
+    const item: HouseModel = {
       title: `Fake data ${i}`,
       description:
         "This is the fake description, use many words to test the ui add more text to make sure the UI still looks very good...",
       imgUrl: "../../src/assets/fake/fake-recent-updated-house.png",
+      price: "",
     };
     fakeData.push(item);
   }
