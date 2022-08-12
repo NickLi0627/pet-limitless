@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import RecentUpdatedHouse from "../components/RecentUpdatedHouse.vue";
-import type HouseModel from "../model/interface";
+import type { HouseModel } from "../model/interface";
 
 const input = ref("");
 

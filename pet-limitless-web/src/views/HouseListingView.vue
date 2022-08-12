@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RowHouse from "../components/RowHouse.vue";
-import type HouseModel from "../model/interface";
+import type { HouseModel } from "../model/interface";
 
 const center = ref([120.9605, 23.6978]);
 const projection = ref("EPSG:4326");

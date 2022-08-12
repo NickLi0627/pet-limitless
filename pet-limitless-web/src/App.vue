@@ -10,8 +10,7 @@ import { RouterLink, RouterView } from "vue-router";
     <nav>
       <ul>
         <li><RouterLink to="/houses">租屋</RouterLink></li>
-        <li><RouterLink to="/tenants">找房客</RouterLink></li>
-        <li><RouterLink to="/partners">找室友</RouterLink></li>
+        <li><RouterLink to="/roommates">找室友</RouterLink></li>
         <li><RouterLink to="/posting">我要刊登</RouterLink></li>
       </ul>
     </nav>
