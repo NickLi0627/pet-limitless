@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type HouseModel from "@/model/interface";
+import type { HouseModel } from "@/model/interface";
 interface Props {
   house: HouseModel;
 }
