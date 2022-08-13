@@ -1,25 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import RoommatePreview from "../components/RoommatePreview.vue";
-import type { RoommateModel } from "../model/interface";
-
-const input = ref("");
-
-// TODO(Nick): replace with the real API call.
-function generateFakeRoommates(): RoommateModel[] {
-  const fakeData: RoommateModel[] = [];
-  for (let i = 1; i < 10; ++i) {
-    const item: RoommateModel = {
-      name: `Fake data ${i}`,
-      age: "This is the fake description, use many words to test the ui add more text to make sure the UI still looks very good...",
-      photoUrl: "../../src/assets/fake/fake-roommate.png",
-      city: "fake city",
-      gender: "Female",
-    };
-    fakeData.push(item);
-  }
-  return fakeData;
-}
+import { generateFakeRoommates } from "../model/roommate";
 </script>
 <template>
   <div class="roommate-container">
@@ -50,8 +31,6 @@ function generateFakeRoommates(): RoommateModel[] {
         </div>
       </div>
     </div>
-
-    <!-- <div class="body-rest"></div> -->
   </div>
 </template>
 

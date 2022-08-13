@@ -1,25 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import RecentUpdatedHouse from "../components/RecentUpdatedHouse.vue";
-import type { HouseModel } from "../model/interface";
+
+import { generateFakeHouses } from "../model/house";
 
 const input = ref("");
-
-// TODO(Nick): replace with the real API call.
-function generateFakeRecentUpdatedHouse(): HouseModel[] {
-  const fakeData: HouseModel[] = [];
-  for (let i = 1; i < 10; ++i) {
-    const item: HouseModel = {
-      title: `Fake data ${i}`,
-      description:
-        "This is the fake description, use many words to test the ui add more text to make sure the UI still looks very good...",
-      imgUrl: "../../src/assets/fake/fake-recent-updated-house.png",
-      price: "",
-    };
-    fakeData.push(item);
-  }
-  return fakeData;
-}
 </script>
 
 <template>
@@ -39,7 +24,7 @@ function generateFakeRecentUpdatedHouse(): HouseModel[] {
     <div class="recent-updated-container">
       <div class="title">近期更新</div>
       <div class="body">
-        <div v-for="item in generateFakeRecentUpdatedHouse()" :key="item.title">
+        <div v-for="item in generateFakeHouses()" :key="item.title">
           <RecentUpdatedHouse :house="item"></RecentUpdatedHouse>
         </div>
       </div>

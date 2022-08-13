@@ -1,27 +1,12 @@
 <script setup lang="ts">
-import RowHouse from "../components/RowHouse.vue";
-import type { HouseModel } from "../model/interface";
+import HousePreview from "../components/HousePreview.vue";
+import type { House } from "../model/house";
+import { generateFakeHouses } from "../model/house";
 
 const center = ref([120.9605, 23.6978]);
 const projection = ref("EPSG:4326");
 const zoom = ref(8);
 const rotation = ref(0);
-
-// TODO(Nick): replace with the real API call.
-function generateFakeHouses(): HouseModel[] {
-  const fakeData: HouseModel[] = [];
-  for (let i = 1; i < 10; ++i) {
-    const item: HouseModel = {
-      title: `Fake data ${i}`,
-      description:
-        "This is the fake description, use many words to test the ui add more text to make sure the UI still looks very good...",
-      imgUrl: "../../src/assets/fake/fake-recent-updated-house.png",
-      price: "",
-    };
-    fakeData.push(item);
-  }
-  return fakeData;
-}
 </script>
 <template>
   <div class="houses-container">
@@ -51,7 +36,7 @@ function generateFakeHouses(): HouseModel[] {
               v-for="item in generateFakeHouses()"
               :key="item.title"
             >
-              <RowHouse :house="item"></RowHouse>
+              <HousePreview :house="item"></HousePreview>
             </div>
           </div>
         </div>

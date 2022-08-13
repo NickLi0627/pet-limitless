@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { RoommateModel } from "@/model/interface";
+import type { Roommate } from "@/model/roommate";
 interface Props {
-  roommate: RoommateModel;
+  roommate: Roommate;
 }
 
 defineProps<Props>();

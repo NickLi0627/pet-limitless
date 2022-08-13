@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { HouseModel } from "@/model/interface";
+import type { House } from "@/model/house";
 interface Props {
-  house: HouseModel;
+  house: House;
 }
 
 defineProps<Props>();
@@ -11,12 +11,16 @@ defineProps<Props>();
   <div class="container">
     <div class="sub-container">
       <div class="left">
-        <img class="img" :src="`${house.imgUrl}`" alt="Recent updated image" />
+        <img
+          class="img"
+          :src="`${house.imgUrls[0]}`"
+          alt="Recent updated image"
+        />
       </div>
 
       <div class="right">
         <div class="title">{{ house.title }}</div>
-        <div class="description">{{ house.description }}</div>
+        <div class="description">{{ house.title }}</div>
       </div>
     </div>
   </div>
@@ -24,7 +28,7 @@ defineProps<Props>();
 
 <script lang="ts">
 export default {
-  name: "RowHouse",
+  name: "HousePreview",
   data() {
     return {};
   },
