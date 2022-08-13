@@ -56,7 +56,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 input {
   width: 400px;
   margin: 20px auto;
@@ -84,11 +84,10 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.search-bar-container .title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
 }
 
 .recent-updated-container {
@@ -96,20 +95,19 @@ input {
   flex-direction: column;
   margin: 2rem 6rem;
   max-width: 100%;
-}
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
 
-.recent-updated-container .title {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.recent-updated-container .body {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
-  justify-content: space-between;
-  /* grid-gap: 10px; */
-  row-gap: 20px;
-  margin-top: 12px;
+  .body {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: space-between;
+    /* grid-gap: 10px; */
+    row-gap: 20px;
+    margin-top: 12px;
+  }
 }
 
 img {
