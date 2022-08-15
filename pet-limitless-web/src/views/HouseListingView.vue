@@ -12,24 +12,24 @@ const rotation = ref(0);
   <div class="houses-container">
     <div class="container-left">
       <div class="wrapper">
-        <div class="fixed-header">
-          <div class="filter-section">
-            <div class="filters">
-              <div class="tag">縣市</div>
-              <div class="tag">價錢</div>
-              <div class="tag">類型</div>
-              <div class="tag">格局</div>
-              <div class="tag">特色</div>
-              <div class="tag">更多選項</div>
-            </div>
-            <div class="info">
-              <div class="search-count">共有 123 筆待租物件</div>
-              <div class="sorting">排序方式</div>
+        <div class="scroll-body">
+          <div class="fixed-header">
+            <div class="filter-section">
+              <div class="filters">
+                <div class="tag">縣市</div>
+                <div class="tag">價錢</div>
+                <div class="tag">類型</div>
+                <div class="tag">格局</div>
+                <div class="tag">特色</div>
+                <div class="tag">更多選項</div>
+              </div>
+              <div class="info">
+                <div class="search-count">共有 123 筆待租物件</div>
+                <div class="sorting">排序方式</div>
+              </div>
             </div>
           </div>
-        </div>
-        <hr class="hr-solid" />
-        <div class="scroll-body">
+          <hr class="hr-solid" />
           <div class="houses">
             <div
               class="house-row"
@@ -158,51 +158,51 @@ export default {
       left: 0;
       right: 0;
       bottom: 0;
-      .fixed-header {
-        flex: 1;
-        .filter-section {
-          display: flex;
-          flex-direction: column;
-          .filters {
-            display: flex;
-            flex-direction: row;
-            padding: 0;
-            margin: 30px 20px;
-            .tag {
-              display: flex;
-              border: 1px solid #e0e0e0;
-              border-radius: 8px;
-              padding: 20px;
-              height: 40px;
-              justify-content: center;
-              font-weight: 700;
-              align-items: center;
-              margin-right: 10px;
-            }
-          }
 
-          .info {
+      .scroll-body {
+        .fixed-header {
+          flex: 1;
+          .filter-section {
             display: flex;
-            flex-direction: row;
-            margin: 0 20px;
-            .search-count {
-              margin-right: auto;
+            flex-direction: column;
+            .filters {
+              display: flex;
+              flex-direction: row;
+              padding: 0;
+              margin: 30px 20px;
+              .tag {
+                display: flex;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 20px;
+                height: 40px;
+                justify-content: center;
+                font-weight: 700;
+                align-items: center;
+                margin-right: 10px;
+              }
+            }
+
+            .info {
+              display: flex;
+              flex-direction: row;
+              margin: 0 20px;
+              .search-count {
+                margin-right: auto;
+              }
             }
           }
         }
-      }
-
-      .hr-solid {
-        border: 0;
-        height: 1px;
-        border-top: 1px solid #696969;
-        margin: 16px 10px;
-        margin: 16px 10px 0px 10px;
-      }
-      .scroll-body {
         flex: 6;
         overflow-y: auto;
         overflow-x: hidden;
+        .hr-solid {
+          border: 0;
+          height: 1px;
+          border-top: 1px solid #696969;
+          margin: 16px 10px;
+          margin: 16px 10px 0px 10px;
+        }
         .houses {
           color: blue;
           margin: 0 20px;

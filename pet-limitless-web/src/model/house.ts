@@ -84,7 +84,7 @@ export function generateFakeHouses(): House[] {
       buildingType: buildingTypes[i],
       location: locations[i],
       size: generateRandomNumber(),
-      rent: generateRandomNumber(),
+      rent: generateRandomNumber() * 1000,
 
       imgUrls: [
         `../../src/assets/fake/house-${i + 1}-1.png`,

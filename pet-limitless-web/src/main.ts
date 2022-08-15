@@ -10,7 +10,7 @@ import "vue3-openlayers/dist/vue3-openlayers.css";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
-
+import "virtual:svg-icons-register";
 import "./assets/main.css";
 
 const app = createApp(App);
