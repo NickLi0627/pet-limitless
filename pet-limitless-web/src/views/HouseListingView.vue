@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import HousePreview from "../components/HousePreview.vue";
-import type { House } from "../model/house";
-import { generateFakeHouses } from "../model/house";
-
-const center = ref([120.9605, 23.6978]);
-const projection = ref("EPSG:4326");
-const zoom = ref(8);
-const rotation = ref(0);
-</script>
 <template>
   <div class="houses-container">
     <div class="container-left">
@@ -16,12 +6,52 @@ const rotation = ref(0);
           <div class="fixed-header">
             <div class="filter-section">
               <div class="filters">
-                <div class="tag">縣市</div>
-                <div class="tag">價錢</div>
-                <div class="tag">類型</div>
-                <div class="tag">格局</div>
-                <div class="tag">特色</div>
-                <div class="tag">更多選項</div>
+                <div class="filter" style="width: calc(14%)">
+                  <Multiselect
+                    v-model="countyValue"
+                    :caret="countyValue === null"
+                    :groups="true"
+                    :options="groupedCountyOptions"
+                    placeholder="縣市"
+                  />
+                </div>
+                <div class="filter" style="width: calc(14%)">
+                  <Multiselect
+                    v-model="townshipValue"
+                    :options="townshipOptions"
+                    :caret="townshipValue === null"
+                    placeholder="鄉鎮"
+                  />
+                </div>
+                <div class="filter" style="width: calc(16%)">
+                  <Multiselect
+                    v-model="houseTypeValue"
+                    :caret="houseTypeValue === null"
+                    :options="houseTypeOptions"
+                    placeholder="類型"
+                  />
+                </div>
+                <div class="filter" style="width: calc(12%)">
+                  <Multiselect
+                    v-model="roomNumberValue"
+                    :options="roomNumberOptions"
+                    :caret="roomNumberValue === null"
+                    placeholder="格局"
+                  />
+                </div>
+                <div class="filter" style="width: calc(22%)">
+                  <Multiselect
+                    v-model="rentValue"
+                    :options="rentOptions"
+                    :caret="rentValue === null"
+                    placeholder="租金"
+                  />
+                </div>
+                <div class="tag">
+                  <button class="button" @click="showMoreHouseFiltersModal()">
+                    更多選項
+                  </button>
+                </div>
               </div>
               <div class="info">
                 <div class="search-count">共有 123 筆待租物件</div>
@@ -44,33 +74,6 @@ const rotation = ref(0);
     </div>
     <div class="container-right">
       <div class="map">
-        <!-- <input
-        type="checkbox"
-        id="fullscreencontrol"
-        v-model="fullscreencontrol"
-      /> -->
-        <!-- <label for="fullscreencontrol">fullscreencontrol</label> -->
-        <!-- <input type="checkbox" id="attribution" v-model="attributioncontrol" /> -->
-        <!-- <label for="attribution">attributioncontrol</label>
-      <input type="checkbox" id="zoom" v-model="zoomcontrol" />
-      <label for="zoom">zoomcontrol</label>
-      <input type="checkbox" id="zoomtoextent" v-model="zoomtoextentcontrol" />
-      <label for="zoomtoextent">zoomtoextentcontrol</label>
-      <input type="checkbox" id="zoomslider" v-model="zoomslidercontrol" />
-      <label for="zoomslider">zoomslidercontrol</label>
-      <input type="checkbox" id="scaleline" v-model="scalelinecontrol" />
-      <label for="scaleline">scalelinecontrol</label>
-      <input type="checkbox" id="overviewmap" v-model="overviewmapcontrol" />
-      <label for="overviewmap">overviewmapcontrol</label>
-      <input
-        type="checkbox"
-        id="mousepositioncontrol"
-        v-model="mousepositioncontrol"
-      />
-      <label for="mousepositioncontrol">mousepositioncontrol</label> -->
-        <!-- <input type="checkbox" id="rotatecontrol" v-model="rotatecontrol" />
-      <label for="rotatecontrol">rotatecontrol</label> -->
-
         <ol-map
           ref="map"
           :loadTilesWhileAnimating="true"
@@ -85,27 +88,13 @@ const rotation = ref(0);
             :projection="projection"
           />
 
-          <ol-fullscreen-control v-if="fullscreencontrol" />
-          <ol-mouseposition-control v-if="mousepositioncontrol" />
-          <ol-attribution-control v-if="attributioncontrol" />
+          <ol-tile-layer>
+            <ol-source-osm />
+          </ol-tile-layer>
 
-          <ol-overviewmap-control v-if="overviewmapcontrol">
-            <ol-tile-layer>
-              <ol-source-osm />
-            </ol-tile-layer>
-          </ol-overviewmap-control>
-
-          <ol-scaleline-control v-if="scalelinecontrol" />
-          <ol-rotate-control v-if="rotatecontrol" />
           <ol-zoom-control
             v-if="zoomcontrol"
             style="position: absolute; left: 50%"
-          />
-          <ol-zoomslider-control v-if="zoomslidercontrol" />
-          <ol-zoomtoextent-control
-            v-if="zoomtoextentcontrol"
-            :extent="[23.906, 42.812, 46.934, 34.597]"
-            tipLabel="Fit to Turkey"
           />
 
           <ol-tile-layer>
@@ -118,26 +107,99 @@ const rotation = ref(0);
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { ref, reactive, computed } from "vue";
+import Multiselect from "@vueform/multiselect";
+import { useUIStore } from "../stores/ui";
+import HousePreview from "../components/HousePreview.vue";
+import { generateFakeHouses } from "../model/house";
+import { useMetadataStore } from "@/stores/metadata";
+
 export default {
-  data() {
+  name: "HouseListingView",
+  components: {
+    HousePreview,
+    Multiselect,
+  },
+  setup() {
+    const uiStore = useUIStore();
+    const showMoreHouseFiltersModal = () => {
+      uiStore.updateShowHouseFiltersModal(true);
+    };
+
+    const metadataStore = useMetadataStore();
+
+    const groupedCountyOptions = metadataStore.groupedCountyOptions.map(
+      (item) => ({
+        label: item.regionName,
+        options: item.counties.map((county) => ({
+          label: county.name,
+          value: county.id,
+        })),
+      })
+    );
+    const countyValue = ref(groupedCountyOptions.at(0)?.options.at(0)?.value);
+
+    const townshipOptions = computed(() => {
+      return metadataStore.townshipOptions
+        .filter((item) => item.countryId === countyValue.value)
+        .map((item) => ({ label: item.name, value: item.id }));
+    });
+
+    const houseTypeOptions = metadataStore.houseTypeOptions.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    const roomNumberOptions = metadataStore.roomNumberOptions.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    const rentOptions = metadataStore.rentOptions.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+
+    const center = reactive([120.9605, 23.6978]);
+    const projection = ref("EPSG:4326");
+    const zoom = ref(8);
+    const rotation = ref(0);
+
     return {
-      fullscreencontrol: false,
-      attributioncontrol: false,
-      zoomcontrol: true,
-      zoomslidercontrol: true,
-      zoomtoextentcontrol: true,
-      scalelinecontrol: true,
-      overviewmapcontrol: true,
-      mousepositioncontrol: true,
-      rotatecontrol: true,
+      generateFakeHouses,
+      center,
+      projection,
+      zoom,
+      rotation,
+      showMoreHouseFiltersModal,
+      countyValue,
+      groupedCountyOptions,
+      townshipValue: null,
+      townshipOptions,
+      houseTypeValue: null,
+      houseTypeOptions,
+      roomNumberValue: null,
+      roomNumberOptions,
+      rentValue: null,
+      rentOptions,
     };
   },
 };
 </script>
 
+<style src="../assets/multiselect.scss"></style>
+
 <style scoped lang="scss">
 .houses-container {
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 198;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
   display: flex;
   height: 100vh;
   margin: 0;
@@ -147,7 +209,7 @@ export default {
     position: relative;
     // display: flex;
     // flex-direction: column;
-    width: calc(50%);
+    width: calc(55%);
 
     .wrapper {
       display: flex;
@@ -170,16 +232,21 @@ export default {
               flex-direction: row;
               padding: 0;
               margin: 30px 20px;
+
+              .filter {
+                display: flex;
+                margin-right: 10px;
+              }
               .tag {
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 40px;
+                width: 100px;
+              }
+              .multiselect {
                 border: 1px solid #e0e0e0;
                 border-radius: 8px;
-                padding: 20px;
-                height: 40px;
-                justify-content: center;
-                font-weight: 700;
-                align-items: center;
-                margin-right: 10px;
               }
             }
 
@@ -216,7 +283,7 @@ export default {
   }
 
   .container-right {
-    width: calc(50%);
+    width: calc(45%);
   }
 }
 </style>

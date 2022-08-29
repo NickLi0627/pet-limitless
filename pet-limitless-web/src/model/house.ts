@@ -12,10 +12,17 @@ export interface HouseType {
   name: string;
 }
 
+export interface HouseLayout {
+  numberOfBedRooms: number;
+  numberOfLivingRooms: number;
+  numberOfBathRooms: number;
+}
+
 export interface House {
   title: string;
   houseType: HouseType;
   buildingType: BuildingType;
+  houseLayout: HouseLayout;
   location: Location;
 
   // TODO(Nick): Optimize these fields
@@ -76,6 +83,18 @@ export function generateFakeHouses(): House[] {
 
   const locations: Location[] = generateFakeLocations();
 
+  const houseLayouts: HouseLayout[] = [
+    { numberOfBathRooms: 1, numberOfBedRooms: 2, numberOfLivingRooms: 3 },
+    { numberOfBathRooms: 1, numberOfBedRooms: 3, numberOfLivingRooms: 2 },
+    { numberOfBathRooms: 3, numberOfBedRooms: 1, numberOfLivingRooms: 1 },
+    { numberOfBathRooms: 4, numberOfBedRooms: 1, numberOfLivingRooms: 1 },
+    { numberOfBathRooms: 2, numberOfBedRooms: 3, numberOfLivingRooms: 2 },
+    { numberOfBathRooms: 1, numberOfBedRooms: 2, numberOfLivingRooms: 1 },
+    { numberOfBathRooms: 3, numberOfBedRooms: 1, numberOfLivingRooms: 2 },
+    { numberOfBathRooms: 4, numberOfBedRooms: 3, numberOfLivingRooms: 2 },
+    { numberOfBathRooms: 2, numberOfBedRooms: 4, numberOfLivingRooms: 1 },
+    { numberOfBathRooms: 1, numberOfBedRooms: 1, numberOfLivingRooms: 1 },
+  ];
   const houses: House[] = [];
   for (let i = 0; i < 10; ++i) {
     const house: House = {
@@ -83,6 +102,7 @@ export function generateFakeHouses(): House[] {
       houseType: houseTypes[i],
       buildingType: buildingTypes[i],
       location: locations[i],
+      houseLayout: houseLayouts[i],
       size: generateRandomNumber(),
       rent: generateRandomNumber() * 1000,
 

@@ -13,14 +13,19 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@kouts/vue-modal": "^2.1.9",
     "@popperjs/core": "^2.11.5",
+    "@vueform/multiselect": "^2.5.2",
     "bootstrap": "^5.2.0",
     "bootstrap-vue-3": "^0.2.6",
     "pinia": "^2.0.16",
+    "vee-validate": "^4.6.7",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.37",
+    "vue-final-modal": "^3.4.4",
     "vue-navigation-bar": "^5.0.2",
     "vue-router": "^4.1.2",
+    "vue-universal-modal": "^1.1.4",
     "vue3-openlayers": "^0.1.70"
   },
   "devDependencies": {

@@ -1,15 +1,7 @@
+<script setup lang="ts"></script>
+
 <template>
-  <div class="about">
-    <h1>這是登入頁面</h1>
-  </div>
+  <p>這是登入頁面</p>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style></style>
