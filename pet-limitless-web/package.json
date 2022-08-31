@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@formkit/vue": "^1.0.0-beta.10",
     "@kouts/vue-modal": "^2.1.9",
     "@popperjs/core": "^2.11.5",
     "@vueform/multiselect": "^2.5.2",
@@ -26,7 +27,8 @@
     "vue-navigation-bar": "^5.0.2",
     "vue-router": "^4.1.2",
     "vue-universal-modal": "^1.1.4",
-    "vue3-openlayers": "^0.1.70"
+    "vue3-openlayers": "^0.1.70",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",

@@ -13,9 +13,12 @@ import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
 import "virtual:svg-icons-register";
 import "./assets/main.css";
 
+import { plugin, defaultConfig } from "@formkit/vue";
+
 const app = createApp(App);
 
 app.use(createPinia());
+app.use(plugin, defaultConfig);
 app.use(router);
 app.use(BootstrapVue3);
 app.use(OpenLayersMap);
